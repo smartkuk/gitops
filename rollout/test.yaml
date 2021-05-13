@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: rollout-bluegreen
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -16,7 +16,8 @@ spec:
       containers:
       - name: rollouts-demo
         # image: argoproj/rollouts-demo:blue
-        image: argoproj/rollouts-demo:green
+        # image: argoproj/rollouts-demo:green
+        image: smartkuk/spring-boot-rest:green
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
