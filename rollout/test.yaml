@@ -15,9 +15,8 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo
         # image: argoproj/rollouts-demo:blue
-        # image: argoproj/argo-rollouts:v0.10.2
+        image: argoproj/rollouts-demo:green
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
