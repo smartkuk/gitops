@@ -18,7 +18,7 @@ spec:
         image: argoproj/rollouts-demo
         # image: argoproj/rollouts-demo:blue
         # image: argoproj/argo-rollouts:v0.10.2
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
   strategy:
