@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
+        #image: smartkuk/spring-boot-rest:latest
         #image: smartkuk/spring-boot-rest:green
         image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: IfNotPresent
