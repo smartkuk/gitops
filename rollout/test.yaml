@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        #image: smartkuk/spring-boot-rest:green
-        image: smartkuk/spring-boot-rest:blue
+        image: smartkuk/spring-boot-rest:green
+        #image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
