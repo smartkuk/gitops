@@ -30,8 +30,7 @@ spec:
   - spring-boot-rest-blue.default.svc.cluster.local
   - spring-boot-rest-green.default.svc.cluster.local
   http:
-  - name: route-green
-    match:
+  - match:
     - headers:
         bxcr-user:
           exact: smartkuk
