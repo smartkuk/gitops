@@ -8,6 +8,10 @@ echo "-----[argo rollout]-----"
 kubectl get rollout
 echo ""
 
+echo "-----[istio virtual service]-----"
+kubectl get vs
+echo ""
+
 echo "-----[k8s service]-----"
 kubectl get service
 echo ""
