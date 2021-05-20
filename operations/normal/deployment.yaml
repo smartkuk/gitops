@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-rest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: spring-boot-rest
+  template:
+    metadata:
+      labels:
+        run: spring-boot-rest
+    spec:
+      containers:
+      - image: smartkuk/spring-boot-rest:latest
+        name: spring-boot-rest
+        ports:
+        - containerPort: 8080
