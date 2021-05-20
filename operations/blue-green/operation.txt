@@ -1,1 +1,6 @@
 kubectl argo rollouts set image spring-boot-rest spring-boot-rest=smartkuk/spring-boot-rest:green
+
+
+
+
+kubectl argo rollouts promote -n default spring-boot-rest
