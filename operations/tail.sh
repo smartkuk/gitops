@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "-----[argo argocd/applications]-----"
+kubectl get applications -n argocd
+echo ""
+
 echo "-----[argo rollout]-----"
 kubectl get rollout
 echo ""

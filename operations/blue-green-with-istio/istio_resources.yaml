@@ -1,0 +1,79 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: bxcr-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app: spring-boot-rest
+    version: v1
+  name: spring-boot-rest-ew
+  namespace: default
+spec:
+  gateways:
+  - mesh
+  hosts:
+  - spring-boot-rest.default.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: spring-boot-rest.default.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app: spring-boot-rest
+    version: v1
+  name: spring-boot-rest-ns
+  namespace: default
+spec:
+  gateways:
+  - bxcr-gateway.istio-system
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /default/spring-boot-rest/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: spring-boot-rest.default.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  labels:
+    app: default-spring-boot-rest
+    version: v1
+  name: spring-boot-rest
+  namespace: default
+spec:
+  host: spring-boot-rest.default.svc.cluster.local
+  subsets:
+  - labels:
+      app: bank-bank-test001
+      version: v1
+    name: blue
+  - labels:
+      app: bank-bank-test001
+      version: v1
+    name: green
