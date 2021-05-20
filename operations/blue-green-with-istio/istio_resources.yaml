@@ -27,12 +27,21 @@ spec:
   gateways:
   - mesh
   hosts:
-  - spring-boot-rest.default.svc.cluster.local
+  - spring-boot-rest-blue.default.svc.cluster.local
+  - spring-boot-rest-green.default.svc.cluster.local
   http:
-  - route:
+  - name: route-green
+    match:
+    - headers:
+        bxcr-user:
+          exact: smartkuk
+    route:
+      destination:
+        host: spring-boot-rest-green.default.svc.cluster.local
+  - name: route-blue
+    route:
     - destination:
-        host: spring-boot-rest.default.svc.cluster.local
-        subset: v1
+        host: spring-boot-rest-blue.default.svc.cluster.local
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -48,32 +57,44 @@ spec:
   hosts:
   - '*'
   http:
-  - match:
+  - name: route-green
+    match:
+    - headers:
+        bxcr-user:
+          exact: smartkuk
     - uri:
         prefix: /default/spring-boot-rest/
     rewrite:
       uri: /
     route:
     - destination:
-        host: spring-boot-rest.default.svc.cluster.local
-        subset: v1
----
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  labels:
-    app: default-spring-boot-rest
-    version: v1
-  name: spring-boot-rest
-  namespace: default
-spec:
-  host: spring-boot-rest.default.svc.cluster.local
-  subsets:
-  - labels:
-      app: bank-bank-test001
-      version: v1
-    name: blue
-  - labels:
-      app: bank-bank-test001
-      version: v1
-    name: green
+        host: spring-boot-rest-green.default.svc.cluster.local
+  - name: route-blue
+    match:
+    - uri:
+        prefix: /default/spring-boot-rest/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: spring-boot-rest-blue.default.svc.cluster.local
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: DestinationRule
+# metadata:
+#   labels:
+#     app: default-spring-boot-rest
+#     version: v1
+#   name: spring-boot-rest
+#   namespace: default
+# spec:
+#   host: spring-boot-rest.default.svc.cluster.local
+#   subsets:
+#   - labels:
+#       app: bank-bank-test001
+#       version: v1
+#     name: blue
+#   - labels:
+#       app: bank-bank-test001
+#       version: v1
+#     name: green

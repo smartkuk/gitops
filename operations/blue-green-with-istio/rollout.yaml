@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
       - name: spring-boot-rest
-        image: smartkuk/spring-boot-rest:green
+        image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
   strategy:
     blueGreen:
-      # activeService: spring-boot-rest
-      # previewService: spring-boot-rest
+      activeService: spring-boot-rest-blue
+      previewService: spring-boot-rest-green
       autoPromotionEnabled: false
