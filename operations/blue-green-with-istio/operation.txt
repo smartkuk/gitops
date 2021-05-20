@@ -1,4 +1,4 @@
-kubectl argo rollouts set image spring-boot-rest spring-boot-rest=smartkuk/spring-boot-rest:green
+
 
 
 
