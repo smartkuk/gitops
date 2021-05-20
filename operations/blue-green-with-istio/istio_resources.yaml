@@ -35,10 +35,9 @@ spec:
         bxcr-user:
           exact: smartkuk
     route:
-      destination:
-        host: spring-boot-rest-green.default.svc.cluster.local
-  - name: route-blue
-    route:
+      - destination:
+          host: spring-boot-rest-green.default.svc.cluster.local
+  - route:
     - destination:
         host: spring-boot-rest-blue.default.svc.cluster.local
 ---
@@ -52,7 +51,7 @@ metadata:
   namespace: default
 spec:
   gateways:
-  - bxcr-gateway.istio-system
+  - istio-system/bxcr-gateway
   hosts:
   - '*'
   http:
