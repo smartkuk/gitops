@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: spring-boot-rest
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: spring-boot-rest
+  template:
+    metadata:
+      labels:
+        app: spring-boot-rest
+    spec:
+      containers:
+      - name: spring-boot-rest
+        image: smartkuk/spring-boot-rest:blue
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+  strategy:
+    blueGreen: 
+      activeService: spring-boot-rest-blue
+      previewService: spring-boot-rest-green
+      autoPromotionEnabled: true
