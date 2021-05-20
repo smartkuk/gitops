@@ -22,5 +22,5 @@ done
 
 echo "run kubectl port-forward for argocd-server 8080 -> 443"
 nohup kubectl port-forward svc/argocd-server -n argocd 8080:443 > /tmp/argocd-server.log 2>&1 &
-nohup kubectl port-forward svc/kiali -n istio-system kiali 20001:20001 > /tmp/kiali.log 2>&1 &
+nohup kubectl port-forward svc/kiali -n istio-system 20001:20001 > /tmp/kiali.log 2>&1 &
 echo "argocd server init password:$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo)"
