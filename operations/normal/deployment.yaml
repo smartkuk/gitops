@@ -6,11 +6,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      run: spring-boot-rest
+      app: spring-boot-rest
   template:
     metadata:
       labels:
-        run: spring-boot-rest
+        app: spring-boot-rest
     spec:
       containers:
       - image: smartkuk/spring-boot-rest:latest
