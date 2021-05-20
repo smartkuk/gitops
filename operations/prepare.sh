@@ -25,5 +25,6 @@ nohup kubectl port-forward svc/argocd-server -n argocd 8080:443 > /tmp/argocd-se
 nohup kubectl port-forward svc/kiali -n istio-system 20001:20001 > /tmp/kiali.log 2>&1 &
 echo "argocd server init password:$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo)"
 
+chrome https://github.com/smartkuk/gitops
 chrome http://localhost:8080
 chrome http://localhost:20001
