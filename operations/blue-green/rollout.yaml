@@ -23,4 +23,4 @@ spec:
     blueGreen: 
       activeService: spring-boot-rest-blue
       previewService: spring-boot-rest-green
-      autoPromotionEnabled: true
+      autoPromotionEnabled: false
