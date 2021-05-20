@@ -1,6 +1,5 @@
-
-
-
-
-
+blue 버전의 pod, rs 제거
 kubectl argo rollouts promote -n default spring-boot-rest
+
+제거된 blue 버전을 되살림
+kubectl argo rollouts undo -n default spring-boot-rest
