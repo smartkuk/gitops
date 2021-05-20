@@ -13,6 +13,16 @@ blue=$(curl -H "bxcr-user: smartkuk" http://${minikube_ip}:${http_port}/default/
 echo ">>> ${blue}"
 echo ""
 
+echo "send request in container => http://spring-boot-rest.default.svc.cluster.local/app/name"
+res=$(kubectl exec -it nginx -c nginx -- curl http://spring-boot-rest.default.svc.cluster.local/app/name)
+echo ">>> ${res}"
+echo ""
+
+echo "send request in container(with http header) => http://spring-boot-rest.default.svc.cluster.local/app/name"
+res=$(kubectl exec -it nginx -c nginx -- curl -H "bxcr-user: smartkuk" http://spring-boot-rest.default.svc.cluster.local/app/name)
+echo ">>> ${res}"
+echo ""
+
 echo "send request in container => http://spring-boot-rest-blue.default.svc.cluster.local/app/name"
 res=$(kubectl exec -it nginx -c nginx -- curl http://spring-boot-rest-blue.default.svc.cluster.local/app/name)
 echo ">>> ${res}"
