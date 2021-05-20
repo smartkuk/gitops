@@ -55,8 +55,7 @@ spec:
   hosts:
   - '*'
   http:
-  - name: route-green
-    match:
+  - match:
     - headers:
         bxcr-user:
           exact: smartkuk
@@ -67,8 +66,7 @@ spec:
     route:
     - destination:
         host: spring-boot-rest-green.default.svc.cluster.local
-  - name: route-blue
-    match:
+  - match:
     - uri:
         prefix: /default/spring-boot-rest/
     rewrite:
