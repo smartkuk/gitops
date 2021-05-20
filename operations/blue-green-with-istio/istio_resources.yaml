@@ -21,32 +21,18 @@ metadata:
   labels:
     app: spring-boot-rest
     version: v1
-  name: spring-boot-rest-blue-ew
+  name: spring-boot-rest-ew
   namespace: default
 spec:
   gateways:
   - mesh
   hosts:
   - spring-boot-rest-blue.default.svc.cluster.local
+  - spring-boot-rest-green.default.svc.cluster.local
   http:
   - route:
     - destination:
         host: spring-boot-rest-blue.default.svc.cluster.local
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  labels:
-    app: spring-boot-rest
-    version: v1
-  name: spring-boot-rest-green-ew
-  namespace: default
-spec:
-  gateways:
-  - mesh
-  hosts:
-  - spring-boot-rest-green.default.svc.cluster.local
-  http:
   - match:
     - headers:
         bxcr-user:
@@ -54,6 +40,46 @@ spec:
     route:
       - destination:
           host: spring-boot-rest-green.default.svc.cluster.local
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   labels:
+#     app: spring-boot-rest
+#     version: v1
+#   name: spring-boot-rest-blue-ew
+#   namespace: default
+# spec:
+#   gateways:
+#   - mesh
+#   hosts:
+#   - spring-boot-rest-blue.default.svc.cluster.local
+#   http:
+#   - route:
+#     - destination:
+#         host: spring-boot-rest-blue.default.svc.cluster.local
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   labels:
+#     app: spring-boot-rest
+#     version: v1
+#   name: spring-boot-rest-green-ew
+#   namespace: default
+# spec:
+#   gateways:
+#   - mesh
+#   hosts:
+#   - spring-boot-rest-green.default.svc.cluster.local
+#   http:
+#   - match:
+#     - headers:
+#         bxcr-user:
+#           exact: smartkuk
+#     route:
+#       - destination:
+#           host: spring-boot-rest-green.default.svc.cluster.local
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
