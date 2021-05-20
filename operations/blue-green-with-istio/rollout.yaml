@@ -21,6 +21,6 @@ spec:
         - containerPort: 8080
   strategy:
     blueGreen:
-      activeService: spring-boot-rest
-      previewService: spring-boot-rest
+      # activeService: spring-boot-rest
+      # previewService: spring-boot-rest
       autoPromotionEnabled: false
