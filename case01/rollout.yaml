@@ -1,3 +1,4 @@
+# preview 서비스를 지정하지 않은 형태
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
@@ -15,16 +16,15 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: smartkuk/spring-boot-rest:latest
-        #image: smartkuk/spring-boot-rest:green
-        #image: smartkuk/spring-boot-rest:blue
+        # image: smartkuk/spring-boot-rest:latest
+        image: smartkuk/spring-boot-rest:green
+        # image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
   strategy:
     blueGreen: 
       activeService: rollout-bluegreen-active
-      previewService: rollout-bluegreen-preview
       autoPromotionEnabled: false
 
 ---
@@ -40,19 +40,4 @@ spec:
     port: 80
     targetPort: 8080
     nodePort: 30081
-  type: NodePort
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: rollout-bluegreen-preview
-spec:
-  selector:
-    app: rollout-bluegreen
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-    nodePort: 30082
   type: NodePort
