@@ -73,7 +73,7 @@ spec:
     - headers:
         bxcr-user:
           exact: smartkuk
-    - uri:
+      uri:
         prefix: /default/spring-boot-rest/
     rewrite:
       uri: /
