@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       app: spring-boot-rest
+      version: v1
   template:
     metadata:
       labels:
         app: spring-boot-rest
+        version: v1
     spec:
       containers:
       - name: spring-boot-rest
@@ -34,6 +36,7 @@ metadata:
 spec:
   selector:
     app: spring-boot-rest
+    version: v1
   ports:
   - protocol: TCP
     port: 80
