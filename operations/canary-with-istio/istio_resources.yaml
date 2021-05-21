@@ -28,11 +28,11 @@ spec:
   - name: primary
     route:
     - destination:
-        host: spring-boot-rest.default.svc.cluster.local
+        host: spring-boot-rest-stable.default.svc.cluster.local
         subset: stable
       weight: 100
     - destination:
-        host: spring-boot-rest.default.svc.cluster.local
+        host: spring-boot-rest-canary.default.svc.cluster.local
         subset: canary
       weight: 0
 ---
