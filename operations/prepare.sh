@@ -51,3 +51,7 @@ echo "argocd server init username/password: admin:$(kubectl -n argocd get secret
 /usr/bin/google-chrome https://github.com/smartkuk/gitops
 /usr/bin/google-chrome http://localhost:8080
 /usr/bin/google-chrome http://localhost:20001
+
+echo "watch ./tail.sh"
+echo "watch ./send.sh"
+echo "watch ./send_istio.sh"
