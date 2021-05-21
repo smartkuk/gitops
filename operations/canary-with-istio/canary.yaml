@@ -21,6 +21,8 @@ spec:
         - containerPort: 8080
   strategy:
     canary:
+      canaryService: spring-boot-rest
+      stableService: spring-boot-rest
       trafficRouting:
         istio:
           virtualService: 
