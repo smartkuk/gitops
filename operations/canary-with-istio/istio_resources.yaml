@@ -1,0 +1,51 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: bxcr-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: rollout-vsvc
+spec:
+  gateways:
+  - istio-system/bxcr-gateway
+  hosts:
+  - spring-boot-rest.default.svc.cluster.local
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: spring-boot-rest.default.svc.cluster.local
+        subset: stable
+      weight: 100
+    - destination:
+        host: spring-boot-rest.default.svc.cluster.local
+        subset: canary
+      weight: 0
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: spring-boot-rest
+spec:
+  host: spring-boot-rest.default.svc.cluster.local
+  subsets:
+  - name: canary
+    labels:
+      app: spring-boot-rest
+  - name: stable
+    labels:
+      app: spring-boot-rest
