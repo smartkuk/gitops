@@ -1,9 +1,10 @@
 #!/bin/bash
 
 minikube_ip=$(minikube ip)
+http_port=$(kubectl get service -n istio-system istio-ingressgateway -o=jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
 
-echo "send request => http://${minikube_ip}:30081/app/name"
-blue=$(curl http://${minikube_ip}:30081/app/name)
+echo "send request istio => http://${minikube_ip}:${http_port}/default/spring-boot-rest/app/name"
+blue=$(curl http://${minikube_ip}:${http_port}/default/spring-boot-rest/app/name)
 echo ">>> ${blue}"
 echo ""
 

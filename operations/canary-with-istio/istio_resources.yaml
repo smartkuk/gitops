@@ -26,6 +26,11 @@ spec:
   - spring-boot-rest.default.svc.cluster.local
   http:
   - name: primary
+    match:
+    - uri:
+        prefix: /default/spring-boot-rest/
+    rewrite:
+      uri: /
     route:
     - destination:
         host: spring-boot-rest-stable
