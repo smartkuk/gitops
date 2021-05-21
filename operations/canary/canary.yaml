@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-rest
-        image: smartkuk/spring-boot-rest:blue
+        image: smartkuk/spring-boot-rest:green
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
