@@ -7,8 +7,11 @@ blue=$(curl http://${minikube_ip}:30081/app/name)
 echo ">>> ${blue}"
 echo ""
 
-echo "send request => http://${minikube_ip}:30081/client/metrics"
-blue=$(curl http://${minikube_ip}:30081/client/metrics)
-echo ">>> ${blue}"
+blue_ip=$(kubectl get pods --field-selector metadata.name!=nginx -o json | jq '.items[] | select(.spec.containers[].image == "smartkuk/spring-boot-rest:blue") | .status.podIP')
+green_ip=$(kubectl get pods --field-selector metadata.name!=nginx -o json | jq '.items[] | select(.spec.containers[].image == "smartkuk/spring-boot-rest:green") | .status.podIP')
+blue_res=$(kubectl exec -it nginx -c nginx -- curl http://${blue_ip//\"/}:8080/client/metrics)
+green_res=$(kubectl exec -it nginx -c nginx -- curl http://${green_ip//\"/}:8080/client/metrics)
+echo "${blue_res}"
+echo "${green_res}"
 echo ""
 date
