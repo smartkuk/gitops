@@ -20,7 +20,6 @@ kind: VirtualService
 metadata:
   labels:
     app: spring-boot-rest
-    version: v1
   name: spring-boot-rest-ew
   namespace: default
 spec:
@@ -47,7 +46,6 @@ kind: VirtualService
 metadata:
   labels:
     app: spring-boot-rest
-    version: v1
   name: spring-boot-rest-ns
   namespace: default
 spec:

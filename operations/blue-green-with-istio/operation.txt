@@ -1,5 +1,9 @@
 blue 버전의 pod, rs 제거
 kubectl argo rollouts promote -n default spring-boot-rest
 
-제거된 blue 버전을 되살림
+실행 취소와 유사하지만 직전 처리만 취소
+만약 promote 처리까지 완료하고 undo 실행시 이전에 없어진 blue 버전은 green 서비스에 물려서 다시 살아난다.
 kubectl argo rollouts undo -n default spring-boot-rest
+
+처리가 진행중인 rollout 이전 replicaset 으로 변경
+kubectl argo rollouts abort -n default spring-boot-rest

@@ -1,24 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: canary-rollout
+  name: spring-boot-rest
 spec:
-  replicas: 8
+  replicas: 2
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: canary
+      app: spring-boot-rest
   template:
     metadata:
       labels:
-        app: canary
+        app: spring-boot-rest
     spec:
       containers:
-      - name: canary-rollouts-demo
-        image: particule/simplecolorapi:1.0
+      - name: spring-boot-rest
+        image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: Always
         ports:
-        - containerPort: 5000
+        - containerPort: 8080
   strategy:
     canary:
       maxSurge: "25%"
@@ -30,13 +30,13 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: canary-service
+  name: spring-boot-rest
 spec:
   selector:
-    app: canary
+    app: spring-boot-rest
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 5000
+    targetPort: 8080
     nodePort: 30081
   type: NodePort
