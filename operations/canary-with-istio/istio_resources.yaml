@@ -33,11 +33,11 @@ spec:
       uri: /
     route:
     - destination:
-        host: spring-boot-rest-stable
+        host: spring-boot-rest
         subset: stable
       weight: 100
     - destination:
-        host: spring-boot-rest-canary
+        host: spring-boot-rest
         subset: canary
       weight: 0
 ---
