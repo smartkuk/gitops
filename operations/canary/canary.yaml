@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: spring-boot-rest
 spec:
-  replicas: 1
+  replicas: 10
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -15,16 +15,16 @@ spec:
     spec:
       containers:
       - name: spring-boot-rest
-        image: smartkuk/spring-boot-rest:green
+        image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
   strategy:
     canary:
-      maxSurge: "50%"
+      maxSurge: "25%"
       maxUnavailable: 0
       steps:
-      - setWeight: 50
+      - setWeight: 10
       - pause: {}
 ---
 kind: Service
