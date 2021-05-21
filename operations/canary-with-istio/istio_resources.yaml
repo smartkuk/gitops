@@ -23,7 +23,7 @@ spec:
   gateways:
   - istio-system/bxcr-gateway
   hosts:
-  - spring-boot-rest.default.svc.cluster.local
+  - '*'
   http:
   - name: primary
     match:
@@ -33,24 +33,8 @@ spec:
       uri: /
     route:
     - destination:
-        host: spring-boot-rest
-        subset: stable
+        host: spring-boot-rest-stable
       weight: 100
     - destination:
-        host: spring-boot-rest
-        subset: canary
+        host: spring-boot-rest-canary
       weight: 0
----
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: spring-boot-rest
-spec:
-  host: spring-boot-rest.default.svc.cluster.local
-  subsets:
-  - name: canary
-    labels:
-      app: spring-boot-rest
-  - name: stable
-    labels:
-      app: spring-boot-rest
