@@ -15,16 +15,16 @@ spec:
     spec:
       containers:
       - name: spring-boot-rest
-        image: smartkuk/spring-boot-rest:green
+        image: smartkuk/spring-boot-rest:blue
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
   strategy:
     canary:
-      maxSurge: "25%"
+      maxSurge: "50%"
       maxUnavailable: 0
       steps:
-      - setWeight: 25
+      - setWeight: 50
       - pause: {}
 ---
 kind: Service
