@@ -21,8 +21,8 @@ spec:
         - containerPort: 8080
   strategy:
     canary:
-      canaryService: spring-boot-rest
-      stableService: spring-boot-rest
+      canaryService: spring-boot-rest-canary
+      stableService: spring-boot-rest-stable
       trafficRouting:
         istio:
           virtualService: 
@@ -40,6 +40,32 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-boot-rest
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: spring-boot-rest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-rest-stable
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: spring-boot-rest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-rest-canary
 spec:
   ports:
   - port: 80
